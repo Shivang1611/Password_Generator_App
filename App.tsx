@@ -149,7 +149,7 @@ export default function App() {
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase:</Text>
+          <Text style={styles.heading}>Include Uppercase:</Text>
             <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
@@ -162,7 +162,7 @@ export default function App() {
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase:</Text>
+          <Text style={styles.heading}>Include Numbers:</Text>
             <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
@@ -173,7 +173,7 @@ export default function App() {
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase:</Text>
+          <Text style={styles.heading}>Include Symbols:</Text>
             <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
