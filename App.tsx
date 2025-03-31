@@ -88,7 +88,7 @@ export default function App() {
       
         <View style={styles.formContainer}>
         <View style={styles.container2}>
-          <Text style={styles.title}>Generate Password</Text>
+          <Text style={styles.title}>Password Generator</Text>
           <Image 
           source={require('./assets/pf1.jpg')}
           style={styles.image}
@@ -99,7 +99,7 @@ export default function App() {
           
          
           <Formik
-          initialValues={{passwordLength:''  }}
+          initialValues={{passwordLength:''}}
           validationSchema={PasswordSchema}
           onSubmit={values=>{
           console.log(values);
@@ -322,14 +322,21 @@ const styles = StyleSheet.create({
   },
   secondaryBtnTxt: {
     textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 16,
+    color: '#000',
+    marginTop: 5,
   },
   card: {
     padding: 12,
     borderRadius: 6,
     marginHorizontal: 12,
+    marginTop:10,
+    width: 300,
+    
   },
   cardElevated: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#bac7db',
     elevation: 1,
     shadowOffset: {
       width: 1,
@@ -344,5 +351,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 12,
     color:'#000'
+  },
+  container3:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+    padding: 20,
+    borderRadius: 25,
+    width:350,
   },
 })
