@@ -101,11 +101,11 @@ export default function App() {
          touched,
          isValid,
          handleChange,
-         
          handleSubmit,
          handleReset,
          
-         /* and other goodies */
+         
+         
        }) => (
          
           <>
@@ -129,7 +129,7 @@ export default function App() {
             //BouncyCheckbox used
             <Text style={styles.heading}>Include Lowercase</Text>
             <BouncyCheckbox
-            disableBuiltInState
+            useBuiltInState={false}
 
               
             isChecked={lowercase}
@@ -140,50 +140,53 @@ export default function App() {
           <View  style={styles.inputWrapper}>
           <Text style={styles.heading}>Include Lowercase</Text>
             <BouncyCheckbox
-            disableBuiltInState
+            useBuiltInState={false}
 
               
-            isChecked={lowercase}
-             onPress={() => setLowercase(!lowercase)}
+            isChecked={uppercase}
+             onPress={() => setUppercase(!
+              uppercase)}
+            
              fillColor='green'
             />
           </View>
           <View  style={styles.inputWrapper}>
           <Text style={styles.heading}>Include Lowercase</Text>
             <BouncyCheckbox
-            disableBuiltInState
+            useBuiltInState={false}
 
               
-            isChecked={lowercase}
-             onPress={() => setLowercase(!lowercase)}
+            isChecked={numbers}
+             onPress={() => setNumbers(!numbers)}
              fillColor='green'
             />
           </View>
           <View  style={styles.inputWrapper}>
           <Text style={styles.heading}>Include Lowercase</Text>
             <BouncyCheckbox
-            disableBuiltInState
+            useBuiltInState={false}
 
               
-            isChecked={lowercase}
-             onPress={() => setLowercase(!lowercase)}
+            isChecked={symbols}
+             onPress={() => setSymbols(!symbols)}
              fillColor='green'
             />
           </View>
           <View style={styles.formActions}>
-            <TouchableOpacity
-              disabled={!isValid}
-                style={styles.primaryButton}
-              onPress={handleSubmit}>
-              <Text>Generate Password</Text>
+          <TouchableOpacity
+          disabled={!isValid}
+          style={styles.primaryBtn}
+          onPress={() => handleSubmit()}
+          >
+          <Text style={styles.primaryBtnTxt}>Generate Password</Text>
             </TouchableOpacity>
             <TouchableOpacity 
-            style={styles.secondarybutton}
+            style={styles.secondaryBtn}
             onPress={()=>{
               handleReset();
-              resetPasswordSet();
+              resetPassword();
             }}>
-              <Text>Reset</Text>
+              <Text style={styles.secondaryBtnTxt}>Reset</Text>
             </TouchableOpacity>
 
             </View>
@@ -191,16 +194,13 @@ export default function App() {
        )}
      </Formik>
         </View>
-        {          ispasswordGenerated ?  (
-          <View style={styles.passwordGenerated}>
-            <Text style={styles.heading}>Result:</Text>
-            <Text style={styles.guidemsg}>Long Press to Copy</Text>
-            <Text selectable={true} style={styles.passwordText}>{password}</Text>
-            
-
-        
+        {ispasswordGenerated ? (
+          <View style={[styles.card, styles.cardElevated]}>
+            <Text style={styles.subTitle}>Result:</Text>
+            <Text style={styles.description}>Long Press to copy</Text>
+            <Text selectable={true} style={styles.generatedPassword}>{password}</Text>
           </View>
-        ):null}
+        ) : null}
         
       </SafeAreaView>
       
@@ -208,4 +208,97 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  appContainer: {
+    flex: 1,
+  },
+  formContainer: {
+    margin: 8,
+    padding: 8,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: '600',
+    marginBottom: 15,
+  },
+  subTitle: {
+    fontSize: 26,
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  description: {
+    color: '#758283',
+    marginBottom: 8,
+  },
+  heading: {
+    fontSize: 15,
+  },
+  inputWrapper: {
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  inputColumn: {
+    flexDirection: 'column',
+  },
+  inputStyle: {
+    padding: 8,
+    width: '30%',
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#16213e',
+  },
+  errorText: {
+    fontSize: 12,
+    color: '#ff0d10',
+  },
+  formActions: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  primaryBtn: {
+    width: 120,
+    padding: 10,
+    borderRadius: 8,
+    marginHorizontal: 8,
+    backgroundColor: '#5DA3FA',
+  },
+  primaryBtnTxt: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: '700',
+  },
+  secondaryBtn: {
+    width: 120,
+    padding: 10,
+    borderRadius: 8,
+    marginHorizontal: 8,
+    backgroundColor: '#CAD5E2',
+  },
+  secondaryBtnTxt: {
+    textAlign: 'center',
+  },
+  card: {
+    padding: 12,
+    borderRadius: 6,
+    marginHorizontal: 12,
+  },
+  cardElevated: {
+    backgroundColor: '#ffffff',
+    elevation: 1,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowColor: '#333',
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  generatedPassword: {
+    fontSize: 22,
+    textAlign: 'center',
+    marginBottom: 12,
+    color:'#000'
+  },
+})
