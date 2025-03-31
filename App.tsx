@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TouchableOpacity ,ScrollView, SafeAreaView, TextInput} from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity ,ScrollView, SafeAreaView, TextInput, Image} from 'react-native'
 import React, { useState } from 'react'
 import { Formik } from 'formik';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -83,19 +83,30 @@ export default function App() {
 
 
   return (
-    <ScrollView keyboardShouldPersistTaps='handled' style={{flex:1,backgroundColor:'#fff',padding:20}}>
+    <ScrollView keyboardShouldPersistTaps='handled' style={{flex:1,backgroundColor:'#040e2d',padding:20}}>
       <SafeAreaView style={styles.appContainer}>
+      
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Password Generator</Text>
+        <View style={styles.container2}>
+          <Text style={styles.title}>Generate Password</Text>
+          <Image 
+          source={require('./assets/pf1.jpg')}
+          style={styles.image}
+         
+
+          />
+          </View>
+          
+         
           <Formik
-       initialValues={{passwordLength:''  }}
-        validationSchema={PasswordSchema}
-      onSubmit={values=>{
-        console.log(values);
-        generatePasswordString(+values.passwordLength)//Todo
-      }}
-     >
-       {({
+          initialValues={{passwordLength:''  }}
+          validationSchema={PasswordSchema}
+          onSubmit={values=>{
+          console.log(values);
+          generatePasswordString(+values.passwordLength)//Todo
+          }}>
+     
+          {({
          values,
          errors,
          touched,
@@ -106,12 +117,12 @@ export default function App() {
          
          
          
-       }) => (
-         
+          }) => (
+           
           <>
           <View  style={styles.inputWrapper}>
             <View style={styles.inputColumn}>
-              <Text style={styles.heading}>
+              <Text style={styles.heading3}>
                 Password Length
               </Text>
               {touched.passwordLength && errors.passwordLength&& (
@@ -127,8 +138,8 @@ export default function App() {
           </View>
           <View  style={styles.inputWrapper}>
             //BouncyCheckbox used
-            <Text style={styles.heading}>Include Lowercase</Text>
-            <BouncyCheckbox
+            <Text style={styles.heading}>Include Lowercase:</Text>
+            <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
               
@@ -138,8 +149,8 @@ export default function App() {
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase</Text>
-            <BouncyCheckbox
+          <Text style={styles.heading}>Include Lowercase:</Text>
+            <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
               
@@ -147,29 +158,29 @@ export default function App() {
              onPress={() => setUppercase(!
               uppercase)}
             
-             fillColor='green'
+             fillColor='red'
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase</Text>
-            <BouncyCheckbox
+          <Text style={styles.heading}>Include Lowercase:</Text>
+            <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
               
             isChecked={numbers}
              onPress={() => setNumbers(!numbers)}
-             fillColor='green'
+             fillColor='yellow'
             />
           </View>
           <View  style={styles.inputWrapper}>
-          <Text style={styles.heading}>Include Lowercase</Text>
-            <BouncyCheckbox
+          <Text style={styles.heading}>Include Lowercase:</Text>
+            <BouncyCheckbox style={styles.checkbox}
             useBuiltInState={false}
 
               
             isChecked={symbols}
              onPress={() => setSymbols(!symbols)}
-             fillColor='green'
+             fillColor='blue'
             />
           </View>
           <View style={styles.formActions}>
@@ -191,14 +202,18 @@ export default function App() {
 
             </View>
           </>
-       )}
-     </Formik>
+          )}
+          </Formik>
         </View>
         {ispasswordGenerated ? (
+          <View style={styles.container3}>
+            <Text style={styles.heading}>Generated Password</Text>
+            
           <View style={[styles.card, styles.cardElevated]}>
-            <Text style={styles.subTitle}>Result:</Text>
+            
             <Text style={styles.description}>Long Press to copy</Text>
             <Text selectable={true} style={styles.generatedPassword}>{password}</Text>
+          </View>
           </View>
         ) : null}
         
@@ -216,10 +231,24 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 8,
   },
+  container2:{
+    
+    flexDirection: 'row',
+    marginBottom: 20,
+    justifyContent: 'space-between',
+
+
+  },
+  image:{
+    height:35,
+    width:30,
+    borderRadius: 50,
+  },
   title: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: '600',
     marginBottom: 15,
+    color:'#fff',
   },
   subTitle: {
     fontSize: 26,
@@ -232,7 +261,20 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 15,
+    color:'#a5bace'
   },
+  heading3:{
+    fontSize: 20,
+    color:'#a5bace',
+    fontWeight: '600',
+    fontFamily: 'sans-serif',
+    marginBottom: 5,
+
+  },
+  checkbox:{
+    marginHorizontal:20
+  },
+
   inputWrapper: {
     marginBottom: 15,
     alignItems: 'center',
@@ -241,13 +283,15 @@ const styles = StyleSheet.create({
   },
   inputColumn: {
     flexDirection: 'column',
+    
   },
   inputStyle: {
     padding: 8,
     width: '30%',
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: '#16213e',
+    borderColor: '#a5bace',
+    color:'#a5bace'
   },
   errorText: {
     fontSize: 12,
