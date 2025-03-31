@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
 
@@ -24,14 +24,58 @@ export default function App() {
 
 
   const generatePasswordString =(passwordLength:number) => {
-    //
+    let charaterList='';
+
+    const upperCaseChars='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const lowerCaseChars='abcdefghijklmnopqrstuvwxyz'
+    const numberChars='0123456789'
+    const symbolChars='!@#$%^&*()_+';
+    if (lowercase)
+    {
+      charaterList += lowerCaseChars
+    }
+    if (uppercase)
+    {
+      charaterList += upperCaseChars
+    }
+
+
+    if (numbers)
+    {
+      charaterList += numberChars
+    }
+    if (symbols)
+    {
+      charaterList += symbolChars
+    }
+
+    const passwordResult=createPassword(charaterList,passwordLength)
+    setpassword(passwordResult)
+    setIsPasswordGenerated(true)
+
+
+
+
   }
   const createPassword = (characters:string,
     passwordLength:number) => {
-    //
+      let result=''
+      for (let i=0;i<passwordLength;i++)
+      {
+        const charaterIndex=Math.round(Math.random() * characters.length)
+        
+        result += characters.charAt(charaterIndex)
+      }
+      return result
+    
   }
   const resetPassword = () => {
-    //
+    setIsPasswordGenerated(false)
+    setpassword('')
+    setLowercase(true)
+    setUppercase(false)
+    setNumbers(false)
+    setSymbols(false)
   }
   
 
@@ -39,7 +83,17 @@ export default function App() {
   return (
     <View>
       <Text>App</Text>
-    </View>
+      <TouchableOpacity onPress={() => generatePasswordString(8)}>
+        <Text>Generate Password</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={resetPassword}>
+        <Text>Reset Password</Text>
+      </TouchableOpacity>
+      <Text>{password}</Text>
+      <Text>
+        {ispasswordGenerated ? 'Password Generated' : 'No Password Generated'}
+      </Text>
+       </View>
   )
 }
 
